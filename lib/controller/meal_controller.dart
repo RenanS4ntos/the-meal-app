@@ -6,7 +6,7 @@ import 'package:the_meal_app/models/meal_model.dart';
 class MealController with ChangeNotifier {
   Future<List<MealModel>> fetchMeals() async {
     String baseUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-    final url = Uri.parse('$baseUrl');
+    final url = Uri.parse(baseUrl);
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
