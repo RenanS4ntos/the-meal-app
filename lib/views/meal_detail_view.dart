@@ -26,7 +26,7 @@ class MealDetailsView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            elevation: 4.0,
+            elevation: 5,
             color: Colors.grey[800],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
@@ -54,10 +54,15 @@ class MealDetailsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Image.network(
-                    meal.image,
-                    width: 300,
-                    height: 200,
+                  ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(8.0), // Arredondar a borda em 8px
+                    child: Image.network(
+                      meal.image,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -69,6 +74,39 @@ class MealDetailsView extends StatelessWidget {
                   Text(
                     meal.description,
                     style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Ingredients',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: meal.ingredients.length,
+                    itemBuilder: (context, index) {
+                      final ingredient = meal.ingredients[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              ingredient.name,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              ingredient.measure,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_meal_app/views/favorite_view.dart';
 import 'package:the_meal_app/views/meals_view.dart';
+import 'package:the_meal_app/views/signin_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -23,6 +24,13 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
+  void logout() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignInView()),
+    );
+  }
+
   @override
   void dispose() {
     pageController.dispose();
@@ -43,7 +51,13 @@ class _HomeViewState extends State<HomeView> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
-        onTap: changePage,
+        onTap: (index) {
+          if (index == 2) {
+            logout();
+          } else {
+            changePage(index);
+          }
+        },
         elevation: 5,
         selectedItemColor: Colors.deepPurple,
         unselectedItemColor: Colors.grey[400],
@@ -57,8 +71,8 @@ class _HomeViewState extends State<HomeView> {
             label: 'Favoritos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
+            icon: Icon(Icons.exit_to_app),
+            label: 'Sair',
           ),
         ],
       ),

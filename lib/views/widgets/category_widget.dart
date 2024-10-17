@@ -25,10 +25,15 @@ class CategoryWidgetView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network(
-            height: 80,
-            width: 100,
-            meal.image,
+          ClipRRect(
+            borderRadius:
+                BorderRadius.circular(8.0), // Arredondar a borda em 8px
+            child: Image.network(
+              meal.image,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
           ),
           Text(
             meal.title,
